@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/components/Home.vue'
+//Importación de las vistas principales
+import Home from '@/view/Home.vue'
 import CarbonDashboard from '@/components/CarbonDashboard.vue'
+import Reportes from '@/view/Reportes.vue'
+import Configuracion from '@/view/Configuracion.vue'
 
 const routes = [
   {
@@ -16,12 +19,12 @@ const routes = [
   {
     path: '/reportes',
     name: 'Reportes',
-    component: () => import('@/components/Reportes.vue') // futuro componente
+    component: Reportes
   },
   {
     path: '/configuracion',
     name: 'Configuracion',
-    component: () => import('@/components/Configuracion.vue') // futuro componente
+    component: Configuracion
   }
 ]
 
