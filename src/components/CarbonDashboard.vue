@@ -3,10 +3,11 @@ import { defineComponent, ref, computed } from 'vue';
 import { EmissionLog, toCO2e } from '@/interfaces/EmissionLog.ts';
 import EmissionForm from './EmissionForm.vue';
 import FacilityCard from './FacilityCard.vue';
+import GaugeMeter from '@/charts/GaugeMeter.vue';
 
 export default defineComponent({
   name: 'CarbonDashboard',
-  components: { EmissionForm, FacilityCard },
+  components: { EmissionForm, FacilityCard, GaugeMeter },
   setup() {
     const emissions = ref<EmissionLog[]>([
       { id: 1, facilityName: 'Planta Norte', gasType: 'CO2', value: 1200, date: '2026-05-28' },
@@ -55,13 +56,19 @@ export default defineComponent({
     <!-- Formulario de ingreso -->
     <EmissionForm @add-emission="addEmission" />
 
-    <!-- Métricas globales -->
-    <div class="card mt-6">
-      <p class="font-semibold">Total CO₂e: {{ totalCO2e.toFixed(2) }} toneladas</p>
-      <p class="font-semibold">Límite legal: {{ legalLimit }} toneladas</p>
-      <p :class="totalCO2e > legalLimit ? 'card-alert' : 'text-alert-success font-bold'">
-        Estado: {{ totalCO2e > legalLimit ? 'En infracción' : 'Cumple' }}
-      </p>
+   <!-- Métricas globales + Gauge -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+      <!-- Métricas -->
+      <div class="card">
+        <p class="font-semibold">Total CO₂e: {{ totalCO2e.toFixed(2) }} toneladas</p>
+        <p class="font-semibold">Límite legal: {{ legalLimit }} toneladas</p>
+        <p :class="totalCO2e > legalLimit ? 'card-alert' : 'text-alert-success font-bold'">
+          Estado: {{ totalCO2e > legalLimit ? 'En infracción' : 'Cumple' }}
+        </p>
+      </div>
+
+      <!-- GaugeMeter -->
+      <GaugeMeter :value="totalCO2e" :limit="legalLimit" />
     </div>
 
     <!-- Tarjetas por planta -->
