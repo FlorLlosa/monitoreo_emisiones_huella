@@ -1,11 +1,18 @@
-<script setup lang="ts"></script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+import CarbonDashboard from './components/CarbonDashboard.vue';
+
+export default defineComponent({
+  name: 'App',
+  components: { CarbonDashboard }
+});
+</script>
+
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+   <div class="min-h-screen bg-gray-100">
+    <CarbonDashboard />
+  </div>
 </template>
 
 <style scoped></style>
