@@ -1,3 +1,4 @@
+// tailwind.config.js
 export default {
   content: [
     "./index.html",
@@ -27,7 +28,6 @@ export default {
   plugins: [
     function ({ addComponents }) {
       addComponents({
-        // Botones
         '.btn-primary': {
           backgroundColor: '#005F73',
           color: '#fff',
@@ -48,7 +48,6 @@ export default {
             backgroundColor: '#9b021d',
           },
         },
-        // Tarjetas
         '.card': {
           backgroundColor: '#ECEFF4',
           borderRadius: '0.5rem',
