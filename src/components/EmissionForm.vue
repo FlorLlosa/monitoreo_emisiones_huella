@@ -49,7 +49,7 @@ export default defineComponent({
       <input
         v-model="facilityName"
         type="text"
-        class="mt-1 block w-full border rounded p-2"
+        class="mt-1 block w-full border rounded p-2 text-blue-900"
         required
       />
     </div>
@@ -59,7 +59,7 @@ export default defineComponent({
       <label class="block text-sm font-medium">Tipo de gas</label>
       <select
         v-model="gasType"
-        class="mt-1 block w-full border rounded p-2"
+        class="mt-1 block w-full border rounded p-2 text-blue-900"
         required
       >
         <option value="CO2">CO₂</option>
@@ -75,7 +75,7 @@ export default defineComponent({
         v-model.number="value"
         type="number"
         min="0"
-        class="mt-1 block w-full border rounded p-2"
+        class="mt-1 block w-full border rounded p-2 text-blue-900"
         required
       />
       <p v-if="value < 0" class="text-alert-danger text-sm">No se permiten valores negativos</p>
@@ -87,7 +87,7 @@ export default defineComponent({
       <input
         v-model="date"
         type="date"
-        class="mt-1 block w-full border rounded p-2"
+        class="mt-1 block w-full border rounded p-2 text-blue-900"
         required
       />
     </div>
