@@ -1,4 +1,4 @@
-<script nag="'ts'">
+<script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { EmissionLog } from '@/interfaces/EmissionLog';
 
@@ -12,7 +12,7 @@ export default defineComponent({
     const date = ref('');
 
     const handleSubmit = () => {
-      if (value.value < 0) return; // validación extra
+      if (value.value < 0) return;
       const newLog: EmissionLog = {
         id: Date.now(),
         facilityName: facilityName.value,
@@ -22,7 +22,6 @@ export default defineComponent({
       };
       emit('add-emission', newLog);
 
-      // Reseto del formulario
       facilityName.value = '';
       gasType.value = 'CO2';
       value.value = 0;
@@ -41,7 +40,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <form @submit.prevent="handleSubmit" class="p-4 border rounded bg-white shadow">
+  <form @submit.prevent="handleSubmit" class="card">
     <h2 class="text-lg font-semibold mb-4">Registrar nueva emisión</h2>
 
     <!-- Nombre de la planta -->
@@ -79,7 +78,7 @@ export default defineComponent({
         class="mt-1 block w-full border rounded p-2"
         required
       />
-      <p v-if="value < 0" class="text-red-600 text-sm">No se permiten valores negativos</p>
+      <p v-if="value < 0" class="text-alert-danger text-sm">No se permiten valores negativos</p>
     </div>
 
     <!-- Fecha -->
@@ -94,10 +93,7 @@ export default defineComponent({
     </div>
 
     <!-- Botón -->
-    <button
-      type="submit"
-      class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-    >
+    <button type="submit" class="btn-primary">
       Agregar emisión
     </button>
   </form>

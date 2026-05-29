@@ -8,23 +8,18 @@ export default defineComponent({
   name: 'CarbonDashboard',
   components: { EmissionForm, FacilityCard },
   setup() {
-    // Estado global de emisiones
     const emissions = ref<EmissionLog[]>([
       { id: 1, facilityName: 'Planta Norte', gasType: 'CO2', value: 1200, date: '2026-05-28' },
       { id: 2, facilityName: 'Planta Sur', gasType: 'CH4', value: 300, date: '2026-05-28' }
     ]);
 
-    // Límite legal total (ejemplo: 50.000 toneladas)
     const legalLimit = 50000;
-    // Límite por planta (ejemplo: 10.000 toneladas)
     const facilityLimit = 10000;
 
-    // Computed: total CO₂e de todas las emisiones
     const totalCO2e = computed(() =>
       emissions.value.reduce((sum, log) => sum + toCO2e(log), 0)
     );
 
-    // Agrupar emisiones por planta
     const facilities = computed(() => {
       const map: Record<string, number> = {};
       emissions.value.forEach(log => {
@@ -36,7 +31,6 @@ export default defineComponent({
       }));
     });
 
-    // Función para agregar nueva emisión desde el formulario
     const addEmission = (log: EmissionLog) => {
       emissions.value.push({ ...log, id: emissions.value.length + 1 });
     };
@@ -52,6 +46,7 @@ export default defineComponent({
   }
 });
 </script>
+
 <template>
   <div class="p-6">
     <!-- Título -->
@@ -61,10 +56,10 @@ export default defineComponent({
     <EmissionForm @add-emission="addEmission" />
 
     <!-- Métricas globales -->
-    <div class="mt-6 p-4 border rounded bg-gray-50">
+    <div class="card mt-6">
       <p class="font-semibold">Total CO₂e: {{ totalCO2e.toFixed(2) }} toneladas</p>
       <p class="font-semibold">Límite legal: {{ legalLimit }} toneladas</p>
-      <p :class="totalCO2e > legalLimit ? 'text-red-600 font-bold' : 'text-green-600 font-bold'">
+      <p :class="totalCO2e > legalLimit ? 'card-alert' : 'text-alert-success font-bold'">
         Estado: {{ totalCO2e > legalLimit ? 'En infracción' : 'Cumple' }}
       </p>
     </div>
@@ -77,6 +72,11 @@ export default defineComponent({
         :facility="facility"
         :limit="facilityLimit"
       />
+    </div>
+
+    <!-- Botón de acción -->
+    <div class="mt-6">
+      <button class="btn-primary">Ver reporte completo</button>
     </div>
   </div>
 </template>
