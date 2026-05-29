@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import CarbonDashboard from './CarbonDashboard.vue';
+import CarbonDashboard from "@/components/CarbonDashboard.vue";
 
 export default defineComponent({
   name: 'Home',
@@ -14,9 +14,9 @@ export default defineComponent({
     <header class="bg-industrial-dark p-4 shadow-md flex justify-between items-center">
       <h1 class="text-xl font-bold text-energy-accent">Monitoreo de Emisiones</h1>
       <nav class="flex gap-4">
-        <a href="#" class="hover:text-energy-accent">Dashboard</a>
-        <a href="#" class="hover:text-energy-accent">Reportes</a>
-        <a href="#" class="hover:text-energy-accent">Configuración</a>
+        <router-lin to="/dashboard" class="hover:text-energy-accent">Dashboard</router-lin>
+        <router-lin to="/reportes" class="hover:text-energy-accent">Reportes</router-lin>
+        <router-lin to="/configuracion" class="hover:text-energy-accent">Configuración</router-lin>
       </nav>
     </header>
 
