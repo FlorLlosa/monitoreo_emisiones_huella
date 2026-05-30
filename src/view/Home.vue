@@ -58,17 +58,70 @@ export default defineComponent({
 
         <!-- Dashboard -->
         <CarbonDashboard v-if="currentView === 'dashboard'" />
+      
         <!-- Plantas -->
-        <div v-else-if="currentView === 'plants'" class="industrial-card p-6">
+        <div v-else-if="currentView === 'plants'" class="space-y-6">
           <h2 class="text-2xl font-bold text-energy-accent mb-4">Plantas Registradas</h2>  
           <p class="text-gray-300">Listado de Plantas.</p>
+
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="industrial-card p-5 border border-cyan-500 rounded-xl">
+              <h3 class="text-lg font-bold">Planta Norte</h3>
+              <p class="mt-2">Emisiones acumuladas: 1200 t CO2e</p>
+              <p class="text-green-400 mt-2">Cumple normativa</p>
+            </div>
+
+            <div class="industrial-card p-5 border border-cyan-500 rounded-xl">
+              <h3 class="text-lg font-bold">Planta Sur</h3>
+              <p class="mt-2">Emisiones acumuladas: 7500 t CO₂e</p>
+              <p class="text-green-400 mt-2">Cumple normativa</p>
+            </div>
+
+            <div class="industrial-card p-5 border border-red-500 rounded-xl">
+              <h3 class="text-lg font-bold">Planta Este</h3>
+              <p class="mt-2">Emisiones acumuladas: 12050 t CO₂e</p>
+              <p class="text-red-400 mt-2">En infracción</p>
+            </div>
+
+          </div>
+
         </div>
         <!--Reportes-->
         <div v-else-if= "currentView === 'reports'" class="industrial-card p-6">
-          <h2 class="text-2xl font-bold text-energy-accent mb-4">Reportes</h2>
-          <p class="text-gray-300">Módulo preparado para exportación PDF</p>
+          <h2 class="text-2xl font-bold text-energy-accent mb-6">Reportes de Emisiones</h2>
+          
+          <table class="w-full text-left">
+            <thead>
+              <tr class="border-b border-gray-600">
+                <th class="p-3">Planta</th>
+                <th class="p-3">Estado</th>
+                <th class="p-3">Acción</th>
+              </tr>
+            </thead>
 
-          <button class="mt-4 px-4 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-700">Descargar PDF</button>
+            <tbody>
+              <tr class="border-b border-gray-700">
+                <td class="p-3">Planta Norte</td>
+                <td class="p-3 text-green-400">Cumple</td>
+                <td class="p-3">
+                  <button class="px-3 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-700">Descargar PDF</button>
+                </td>
+              </tr>
+
+              <tr class="border-b border-gray-700">
+                <td class="p-3">Planta Sur</td>
+                <td class="p-3 text-green-400">Cumple</td>
+                <td class="p-3">
+                  <button class="px-3 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-700">Descargar PDF</button>
+                </td>
+              </tr>
+            </tbody>
+
+          </table>
+
+          <div class="mt-6 p-4 rounded-lg border border-yellow-500 bg-yellow-500/10">
+            <p class="text-yellow-300">Funcionalidad preparada para generación automática de reportes PDF.</p>
+          </div>
         </div>
 
       </main>
