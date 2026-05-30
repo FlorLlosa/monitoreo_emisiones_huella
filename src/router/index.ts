@@ -5,6 +5,11 @@ import Home from '@/views/Home.vue'
 import CarbonDashboard from '@/components/CarbonDashboard.vue'
 import Reportes from '@/views/Reportes.vue'
 import Configuracion from '@/views/Configuracion.vue'
+//Importación de rutas de usuarios
+import UserList from '@/views/users/UserList.vue'
+import UserCreate from '@/views/users/UserCreate.vue'
+import UserDetail from '@/views/users/UserDetail.vue'
+import UserEdit from '@/views/users/UserEdit.vue'
 
 const routes = [
   {
@@ -26,7 +31,27 @@ const routes = [
     path: '/configuracion',
     name: 'Configuracion',
     component: Configuracion
-  }
+  },
+  {
+  path: '/users',
+  name: 'UserList',
+  component: UserList
+},
+{
+  path: '/users/create',
+  name: 'UserCreate',
+  component: UserCreate
+},
+{
+  path: '/users/:id',
+  name: 'UserDetail',
+  component: UserDetail
+},
+{
+  path: '/users/:id/edit',
+  name: 'UserEdit',
+  component: UserEdit
+}
 ]
 
 const router = createRouter({
