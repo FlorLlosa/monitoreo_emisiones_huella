@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-//Importación de las vistas principales
-import Home from '@/view/Home.vue'
-import CarbonDashboard from '@/components/CarbonDashboard.vue'
-import Reportes from '@/view/Reportes.vue'
-import Configuracion from '@/view/Configuracion.vue'
 
+// Importación de las vistas principales
+import Home from '@/views/Home.vue'
+import CarbonDashboard from '@/components/CarbonDashboard.vue'
+import Reportes from '@/views/Reportes.vue'
+import Configuracion from '@/views/Configuracion.vue'
 
 const routes = [
   {
@@ -29,11 +29,9 @@ const routes = [
   }
 ]
 
-
 const router = createRouter({
   history: createWebHistory(),
   routes
 })
-
 
 export default router
