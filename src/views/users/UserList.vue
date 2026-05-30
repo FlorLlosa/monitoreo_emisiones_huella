@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
 import type { User } from '@/interfaces/User'
 
 const users = ref<User[]>([
   {
     id: 1,
-    name: 'Anna Gómez',
+    name: 'Ana Gómez',
     email: 'ana@empresa.com',
     role: 'Administrador',
     active: true
@@ -29,9 +30,16 @@ const users = ref<User[]>([
 
 <template>
   <div class="industrial-card p-6">
-    <h1 class="text-2xl font-bold text-energy-accent mb-6">
-      Gestión de Usuarios
-    </h1>
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-2xl font-bold text-energy-accent">
+        Gestión de Usuarios
+      </h1>
+      <RouterLink
+        to="/users/create"
+        class="px-4 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-700 text-white">
+        Nuevo Usuario
+      </RouterLink>
+    </div>
 
     <table class="w-full text-left">
       <thead>
@@ -41,6 +49,7 @@ const users = ref<User[]>([
           <th class="p-3">Email</th>
           <th class="p-3">Rol</th>
           <th class="p-3">Estado</th>
+          <th class="p-3">Acciones</th>
         </tr>
       </thead>
 
@@ -54,10 +63,22 @@ const users = ref<User[]>([
           <td class="p-3">{{ user.email }}</td>
           <td class="p-3">{{ user.role }}</td>
           <td class="p-3">
-            <span
-              :class="user.active ? 'text-green-400' : 'text-red-400'">
+            <span :class="user.active ? 'text-green-400' : 'text-red-400'">
               {{ user.active ? 'Activo' : 'Inactivo' }}
             </span>
+          </td>
+          <td class="p-3 flex gap-2">
+            <RouterLink
+              :to="`/users/${user.id}`"
+              class="px-3 py-1 rounded bg-slate-600 hover:bg-slate-500">
+              Ver
+            </RouterLink>
+
+            <RouterLink
+              :to="`/users/${user.id}/edit`"
+              class="px-3 py-1 rounded bg-cyan-600 hover:bg-cyan-700">
+              Editar
+            </RouterLink>
           </td>
         </tr>
       </tbody>
