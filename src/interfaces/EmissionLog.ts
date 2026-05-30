@@ -1,10 +1,11 @@
 // Interfaz estricta para cada registro de emisión
 export interface EmissionLog {
-  id: number;                // Identificador único
-  facilityName: string;      // Nombre de la planta
-  gasType: 'CO2' | 'CH4' | 'NOx'; // Tipo de gas
-  value: number;             // Volumen en m³
-  date: string;              // Fecha en formato ISO (YYYY-MM-DD)
+  id: number;                
+  facilityName: string;      
+  gasType: 'CO2' | 'CH4' | 'NOx'; 
+  value: number;         
+  unit: 'm3' | 'liters' | 'ft3';    
+  date: string;             
 }
 
 // Factores de conversión a CO₂e (Global Warming Potential - GWP)
@@ -14,8 +15,30 @@ export const conversionFactors: Record<'CO2' | 'CH4' | 'NOx', number> = {
   NOx: 298   // Óxidos de nitrógeno ≈ 298 veces más potentes
 };
 
+export function convertToM3(
+  value: number,
+  unit: 'm3' | 'liters' | 'ft3'
+): number {
+
+  switch (unit) {
+    case 'liters':
+      return value / 1000;
+
+    case 'ft3':
+      return value * 0.0283168;
+
+    default:
+      return value;
+  }
+}
+
 // Función auxiliar para convertir cualquier emisión a CO₂e
 export function toCO2e(log: EmissionLog): number {
   const factor = conversionFactors[log.gasType];
-  return log.value * factor;
+
+  const valueInM3 = convertToM3(
+    log.value,
+    log.unit
+  );
+  return valueInM3 * factor;
 }

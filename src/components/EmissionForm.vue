@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { EmissionLog } from '@/interfaces/EmissionLog';
+import type { EmissionLog } from '@/interfaces/EmissionLog';
 
 export default defineComponent({
   name: 'EmissionForm',
@@ -9,6 +9,7 @@ export default defineComponent({
     const facilityName = ref('');
     const gasType = ref<'CO2' | 'CH4' | 'NOx'>('CO2');
     const value = ref(0);
+    const unit = ref<'m3' | 'liters' | 'ft3'>('m3');
     const date = ref('');
 
     const handleSubmit = () => {
@@ -18,6 +19,7 @@ export default defineComponent({
         facilityName: facilityName.value,
         gasType: gasType.value,
         value: value.value,
+        unit: unit.value,
         date: date.value
       };
       emit('add-emission', newLog);
@@ -25,6 +27,7 @@ export default defineComponent({
       facilityName.value = '';
       gasType.value = 'CO2';
       value.value = 0;
+      unit.value = 'm3';
       date.value = '';
     };
 
@@ -32,6 +35,7 @@ export default defineComponent({
       facilityName,
       gasType,
       value,
+      unit,
       date,
       handleSubmit
     };
@@ -81,6 +85,17 @@ export default defineComponent({
       <p v-if="value < 0" class="text-alert-danger text-sm">No se permiten valores negativos</p>
     </div>
 
+    <!--Unidad-->
+    <div class="mb-3">
+      <label class="block text-sm font-medium">Unidad</label>
+
+      <select v-model="unit" class="mt-1 block w-full border rounded p-2 text-blue-900">
+        <option value="m3">Metros cúbicos (m³)</option>
+        <option value="liters">Litros (L)</option>
+        <option value="ft³">Pies cúbicos (ft³)</option>
+      </select>
+    </div>
+
     <!-- Fecha -->
     <div class="mb-3">
       <label class="block text-sm font-medium">Fecha</label>
@@ -93,8 +108,6 @@ export default defineComponent({
     </div>
 
     <!-- Botón -->
-    <button type="submit" class="btn-primary">
-      Agregar emisión
-    </button>
+    <button type="submit" class="btn-primary"> Agregar emisión </button>
   </form>
 </template>
