@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '@/views/Home.vue'
+import Login from '@/views/Login.vue'
+
 import CarbonDashboard from '@/components/CarbonDashboard.vue'
 import Reportes from '@/views/Reportes.vue'
 import Configuracion from '@/views/Configuracion.vue'
@@ -12,6 +14,11 @@ import UserEdit from '@/views/users/UserEdit.vue'
 
 const routes = [
   {
+    path: '/login',
+    name: 'Login',
+    component: Login
+   },
+   {
     path: '/',
     component: Home,
     children: [
@@ -54,7 +61,7 @@ const routes = [
         name: 'UserEdit',
         component: UserEdit
       }
-    ]
+    ],
   }
 ]
 
